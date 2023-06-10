@@ -17,16 +17,22 @@ CREATE TABLE clientes(
     compañia VARCHAR (50) NOT NULL
 );
 
+CREATE TABLE productos(
+    idProducto INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_producto VARCHAR (50) NOT NULL,
+    precio_productos INT (20) NOT NULL
+);
+
 CREATE TABLE cotizaciones (
   cotizacionid INT AUTO_INCREMENT PRIMARY KEY,
   idClientes INT,
   idEmpleados INT,
+  idProducto INT(20),
   fecha_alquiler DATETIME,
-  duracion_alquiler INT,
-  precio_dia DECIMAL(10, 2),
   total DECIMAL(10, 2),
   FOREIGN KEY (idClientes) REFERENCES clientes(idClientes),
-  FOREIGN KEY (idEmpleados) REFERENCES empleado(idEmpleados)
+  FOREIGN KEY (idEmpleados) REFERENCES empleado(idEmpleados),
+  FOREIGN KEY (idProducto) REFERENCES productos(idProducto)
 );
 
 

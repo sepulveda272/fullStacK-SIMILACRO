@@ -72,6 +72,39 @@ class Empleados extends ConexionPDO{
             return $e->getMessage();
         }
     }
+    public function delete(){
+        try {
+            $stm = $this->dbCnx -> prepare("DELETE FROM empleado WHERE idEmpleados = ?");
+            $stm -> execute([$this->idEmpleados]);
+            return $stm -> fetchAll();
+            /* echo "<script>alert('Registro eliminadoo');document.location='empleados.php'</script>"; */
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+    public function selectOne(){
+        try {
+            $stm = $this->dbCnx -> prepare("SELECT * FROM empleado WHERE idEmpleados = ?");
+            $stm -> execute([$this->idEmpleados]);
+            return $stm->fetchAll();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function update(){
+        try {
+            $stm = $this->dbCnx ->prepare("UPDATE empleado SET nombres = ?, celular = ?, direccion = ? WHERE idEmpleados =?");
+            $stm -> execute([$this->nombres,$this->celular, $this->direccion,$this->idEmpleados]);
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+}
+
+class Clientes extends ConexionPDO{
+
 }
 
 ?>
