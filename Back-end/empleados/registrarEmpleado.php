@@ -10,8 +10,8 @@ if (isset($_POST['guardar'])) {
 
     $config = new Empleados();
     
-    $config -> setNombres($_POST['nombres']);
-    $config -> setCelular($_POST['celular']);
+    $config -> setNombres_Empleados($_POST['nombres_Empleados']);
+    $config -> setCelular_Empleados($_POST['celular_Empleados']);
     $config -> setDireccion($_POST['direccion']);
 
     $config -> insertData();

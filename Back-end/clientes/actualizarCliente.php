@@ -7,10 +7,10 @@ error_reporting(E_ALL);
 
 //primer paso
 require_once("../config.php");
-$data = new Empleados();
+$data = new Clientes();
 
-$id = $_GET['idEmpleados'];
-$data->setIdEmpleados($id);
+$id = $_GET['idClientes'];
+$data->setIdClientes($id);
 
 
 $record = $data->selectOne();
@@ -24,14 +24,14 @@ $val = $record[0];
 //segundo paso
 
 if (isset($_POST['editar'])){
-    $data ->setNombres_Empleados($_POST['nombres_Empleados']);
-    $data ->setCelular_Empleados($_POST['celular_Empleados']);
-    $data ->setDireccion($_POST['direccion']);
+    $data ->setNombres_Clientes($_POST['nombres_Clientes']);
+    $data ->setCelular_Clientes($_POST['celular_Clientes']);
+    $data ->setCompañia($_POST['compañia']);
     /* print_r($data); */
 
     $data->update();
     print_r($data);
-    echo "<script>alert('Datos actualizados satisfactoriamente');document.location='empleados.php'</script>";
+    echo "<script>alert('Datos actualizados satisfactoriamente');document.location='clientes.php'</script>";
 }
 ?>
 
@@ -42,7 +42,7 @@ if (isset($_POST['editar'])){
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Actualizar Empleado</title>
+  <title>Actualizar Cliente</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
@@ -71,12 +71,12 @@ if (isset($_POST['editar'])){
           <h3 style="margin: 0px;font-weight: 800;">Home</h3>
         </a>
 
-        <a href="empleados.php" style="display: flex;gap:2px;">
+        <a href="../empleados/empleados.php" style="display: flex;gap:2px;">
         <i class="bi bi-cart-check"></i>
           <h3 style="margin: 0px;">Empleados</h3>
         </a>
 
-        <a href="../clientes/clientes.php" style="display: flex;gap:2px;">
+        <a href="clientes.php" style="display: flex;gap:2px;">
         <i class="bi bi-cart-check"></i>
           <h3 style="margin: 0px;">Clientess</h3>
         </a>
@@ -90,40 +90,40 @@ if (isset($_POST['editar'])){
     </div>
 
     <div class="parte-media">
-        <h2 class="m-2">Empleado a Editar</h2>
+        <h2 class="m-2">Cliente a Editar</h2>
       <div class="menuTabla contenedor2">
       <form class="col d-flex flex-wrap" action=""  method="post">
               <div class="mb-1 col-12">
-                <label for="nombres_Empleados" class="form-label">Nombres</label>
+                <label for="nombres_Clientes" class="form-label">Nombres</label>
                 <input 
                   type="text"
-                  id="nombres_Empleados"
-                  name="nombres_Empleados"
+                  id="nombres_Clientes"
+                  name="nombres_Clientes"
                   class="form-control"  
-                  value="<?php echo $val['nombres_Empleados']?>"
+                  value="<?php echo $val['nombres_Clientes']?>"
                 />
               </div>
 
               <div class="mb-1 col-12">
-                <label for="celular_Empleados" class="form-label">Celular</label>
+                <label for="celular_Clientes" class="form-label">Celular</label>
                 <input 
                   type="number"
-                  id="celular_Empleados"
-                  name="celular_Empleados"
+                  id="celular_Clientes"
+                  name="celular_Clientes"
                   class="form-control"  
-                  value="<?php echo $val['celular_Empleados']?>"
+                  value="<?php echo $val['celular_Clientes']?>"
                  
                 />
               </div>
 
               <div class="mb-1 col-12">
-                <label for="direccion" class="form-label">Direccion</label>
+                <label for="compañia" class="form-label">Compañia</label>
                 <input 
                   type="text"
-                  id="direccion"
-                  name="direccion"
+                  id="compañia"
+                  name="compañia"
                   class="form-control"  
-                  value="<?php echo $val['direccion']?>"
+                  value="<?php echo $val['compañia']?>"
                  
                 />
               </div>

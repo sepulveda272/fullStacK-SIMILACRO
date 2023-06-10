@@ -5,31 +5,31 @@ USE alquilartemis;
 
 CREATE TABLE empleado(
     idEmpleados INT primary key auto_increment,
-    nombres VARCHAR (50) NOT NULL,
-    celular INT (20) NOT NULL,
-    direccion VARCHAR (50) NOT NULL
+    nombres_Empleados VARCHAR (200) NOT NULL,
+    celular_Empleados INT (50) NOT NULL,
+    direccion VARCHAR (200) NOT NULL
 );
 
 CREATE TABLE clientes(
     idClientes INT primary key auto_increment,
-    nombre VARCHAR (50) NOT NULL,
-    celular INT (20) NOT NULL,
-    compañia VARCHAR (50) NOT NULL
+    nombres_Clientes VARCHAR (200) NOT NULL,
+    celular_Clientes INT (50) NOT NULL,
+    compañia VARCHAR (200) NOT NULL
 );
 
 CREATE TABLE productos(
     idProducto INT PRIMARY KEY AUTO_INCREMENT,
-    nombre_producto VARCHAR (50) NOT NULL,
-    precio_productos INT (20) NOT NULL
+    nombres_productos VARCHAR (200) NOT NULL,
+    precios_productos INT (50) NOT NULL
 );
 
 CREATE TABLE cotizaciones (
   cotizacionid INT AUTO_INCREMENT PRIMARY KEY,
   idClientes INT,
   idEmpleados INT,
-  idProducto INT(20),
+  idProducto INT(50),
   fecha_alquiler DATETIME,
-  total DECIMAL(10, 2),
+  total INT (50),
   FOREIGN KEY (idClientes) REFERENCES clientes(idClientes),
   FOREIGN KEY (idEmpleados) REFERENCES empleado(idEmpleados),
   FOREIGN KEY (idProducto) REFERENCES productos(idProducto)
@@ -39,8 +39,8 @@ CREATE TABLE cotizaciones (
 CREATE TABLE users(
     id INT PRIMARY KEY AUTO_INCREMENT,
     IDEmpleado INT NOT NULL,
-    email VARCHAR (80) NOT NULL,
-    username VARCHAR (80) NOT NULL,
-    password VARCHAR (60) NOT NULL,
+    email VARCHAR (200) NOT NULL,
+    username VARCHAR (200) NOT NULL,
+    password VARCHAR (200) NOT NULL,
     FOREIGN KEY (IDEmpleado) REFERENCES empleado(idEmpleados)
 );

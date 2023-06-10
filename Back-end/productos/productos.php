@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 
 require_once("../config.php");
 
-$data = new Empleados();
+$data = new Productos();
 
 $all = $data-> obtainAll();
 
@@ -48,7 +48,7 @@ $all = $data-> obtainAll();
           <i class="bi bi-house-door"> </i>
           <h3 style="margin: 0px;">Home</h3>
         </a>
-        <a href="empleados.php" style="display: flex;gap:1px;">
+        <a href="../empleados/empleados.php" style="display: flex;gap:1px;">
           <i class="bi bi-people"></i>
           <h3 style="margin: 0px;font-weight: 800;">Empleados</h3>
         </a>
@@ -56,7 +56,7 @@ $all = $data-> obtainAll();
           <i class="bi bi-people"></i>
           <h3 style="margin: 0px;font-weight: 800;">Clientes</h3>
         </a>
-        <a href="../productos/productos.php" style="display: flex;gap:1px;">
+        <a href="productos.php" style="display: flex;gap:1px;">
           <i class="bi bi-people"></i>
           <h3 style="margin: 0px;font-weight: 800;">Productos</h3>
         </a>
@@ -66,7 +66,7 @@ $all = $data-> obtainAll();
 
     <div class="parte-media">
       <div style="display: flex; justify-content: space-between;">
-        <h2>Empleados</h2>
+        <h2>Productos</h2>
         <button class="btn-m" data-bs-toggle="modal" data-bs-target="#registrarEstudiantes"><i class="bi bi-person-add " style="color: rgb(255, 255, 255);" ></i></button>
       </div>
       <div class="menuTabla contenedor2">
@@ -75,8 +75,7 @@ $all = $data-> obtainAll();
             <tr>
               <th scope="col">#</th>
               <th scope="col">NOMBRE</th>
-              <th scope="col">CELULAR</th>
-              <th scope="col">DIRECCION</th>
+              <th scope="col">PRECIO</th>
               <th scope="col">BORRAR</th>
             </tr>
           </thead>
@@ -97,13 +96,12 @@ $all = $data-> obtainAll();
               ?>
 
               <tr>
-              <td class=""><?php echo $val['idEmpleados']?></td>
-              <td><?php echo $val['nombres_Empleados']?></td>
-              <td><?php echo $val['celular_Empleados']?></td>
-              <td><?php echo $val['direccion']?></td>
+              <td class=""><?php echo $val['idProducto']?></td>
+              <td><?php echo $val['nombres_productos']?></td>
+              <td><?php echo $val['precios_productos']?></td>
               <td>
-                <a class="btn btn-danger" href="borrarEmpleado.php?idEmpleados=<?=$val['idEmpleados']?>&req=delete">Borrar</a>
-                <a class="btn btn-warning" href="actualizarEmpleado.php?idEmpleados=<?=$val['idEmpleados']?>">Editar</a>
+                <a class="btn btn-danger" href="borrarProducto.php?idProducto=<?=$val['idProducto']?>&req=delete">Borrar</a>
+                <a class="btn btn-warning" href="actualizarProducto.php?idProducto=<?=$val['idProducto']?>">Editar</a>
               </td>
               </tr>
               <?php } ?>
@@ -138,37 +136,27 @@ $all = $data-> obtainAll();
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body" style="background-color: rgb(231, 253, 246);">
-            <form action="registrarEmpleado.php" class="col d-flex flex-wrap" method="post">
+            <form action="registrarProducto.php" class="col d-flex flex-wrap" method="post">
               <div class="mb-1 col-12">
-                <label for="nombres_Empleados" class="form-label">Nombres</label>
+                <label for="nombres_productos" class="form-label">Nombres</label>
                 <input 
                   type="text"
-                  id="nombres_Empleados"
-                  name="nombres_Empleados"
+                  id="nombres_productos"
+                  name="nombres_productos"
                   class="form-control"  
                 />
               </div>
 
               <div class="mb-1 col-12">
-                <label for="celular_Empleados" class="form-label">Celular</label>
+                <label for="precios_productos" class="form-label">Precios</label>
                 <input 
                   type="number"
-                  id="celular_Empleados"
-                  name="celular_Empleados"
+                  id="precios_productos"
+                  name="precios_productos"
                   class="form-control"  
                 />
               </div>
 
-              <div class="mb-1 col-12">
-                <label for="direccion" class="form-label">Direccion</label>
-                <input 
-                  type="text"
-                  id="direccion"
-                  name="direccion"
-                  class="form-control"  
-                 
-                />
-              </div>
 
               <div class=" col-12 m-2">
                 <input type="submit" class="btn btn-primary" value="guardar" name="guardar"/>

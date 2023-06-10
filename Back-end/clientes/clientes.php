@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 
 require_once("../config.php");
 
-$data = new Empleados();
+$data = new Clientes();
 
 $all = $data-> obtainAll();
 
@@ -56,6 +56,10 @@ $all = $data-> obtainAll();
           <i class="bi bi-people"></i>
           <h3 style="margin: 0px;font-weight: 800;">Clientes</h3>
         </a>
+        <a href="../productos/productos.php" style="display: flex;gap:1px;">
+          <i class="bi bi-people"></i>
+          <h3 style="margin: 0px;font-weight: 800;">Productos</h3>
+        </a>
 
 
       </div>
@@ -73,14 +77,37 @@ $all = $data-> obtainAll();
               <th scope="col">#</th>
               <th scope="col">NOMBRE</th>
               <th scope="col">CELULAR</th>
-              <th scope="col">DIRECCION</th>
+              <th scope="col">COMPAÑIA</th>
               <th scope="col">BORRAR</th>
             </tr>
           </thead>
           <tbody class="" id="tabla">
 
             <!-- ///////Llenado DInamico desde la Base de Datos -->
-         
+            <?php
+
+              foreach ($all as $key => $val){
+                /* echo '<tr>';
+                echo '<td>'. $key. '</td>';
+                echo '<td>'. $val->nombre. '</td>';
+                echo '<td>'. $val->diametro. '</td>';
+                echo '<td>'. $val->logradouro. '</td>';
+                echo '<td>'. $val->detalle. '</td>'; */
+
+
+              ?>
+
+              <tr>
+              <td class=""><?php echo $val['idClientes']?></td>
+              <td><?php echo $val['nombres_Clientes']?></td>
+              <td><?php echo $val['celular_Clientes']?></td>
+              <td><?php echo $val['compañia']?></td>
+              <td>
+                <a class="btn btn-danger" href="borrarCliente.php?idClientes=<?=$val['idClientes']?>&req=delete">Borrar</a>
+                <a class="btn btn-warning" href="actualizarCliente.php?idClientes=<?=$val['idClientes']?>">Editar</a>
+              </td>
+              </tr>
+              <?php } ?>
        
 
           </tbody>
@@ -112,33 +139,33 @@ $all = $data-> obtainAll();
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body" style="background-color: rgb(231, 253, 246);">
-            <form action="registrarEmpleado.php" class="col d-flex flex-wrap" method="post">
+            <form action="registrarClientes.php" class="col d-flex flex-wrap" method="post">
               <div class="mb-1 col-12">
-                <label for="nombres" class="form-label">Nombres</label>
+                <label for="nombres_Clientes" class="form-label">Nombres</label>
                 <input 
                   type="text"
-                  id="nombres"
-                  name="nombres"
+                  id="nombres_Clientes"
+                  name="nombres_Clientes"
                   class="form-control"  
                 />
               </div>
 
               <div class="mb-1 col-12">
-                <label for="celular" class="form-label">Celular</label>
+                <label for="celular_Clientes" class="form-label">Celular</label>
                 <input 
                   type="number"
-                  id="celular"
-                  name="celular"
+                  id="celular_Clientes"
+                  name="celular_Clientes"
                   class="form-control"  
                 />
               </div>
 
               <div class="mb-1 col-12">
-                <label for="direccion" class="form-label">Direccion</label>
+                <label for="compañia" class="form-label">compañia</label>
                 <input 
                   type="text"
-                  id="direccion"
-                  name="direccion"
+                  id="compañia"
+                  name="compañia"
                   class="form-control"  
                  
                 />

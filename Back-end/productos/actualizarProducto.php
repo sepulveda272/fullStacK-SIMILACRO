@@ -7,10 +7,10 @@ error_reporting(E_ALL);
 
 //primer paso
 require_once("../config.php");
-$data = new Empleados();
+$data = new Productos();
 
-$id = $_GET['idEmpleados'];
-$data->setIdEmpleados($id);
+$id = $_GET['idProducto'];
+$data->setIdProducto($id);
 
 
 $record = $data->selectOne();
@@ -24,14 +24,13 @@ $val = $record[0];
 //segundo paso
 
 if (isset($_POST['editar'])){
-    $data ->setNombres_Empleados($_POST['nombres_Empleados']);
-    $data ->setCelular_Empleados($_POST['celular_Empleados']);
-    $data ->setDireccion($_POST['direccion']);
+    $data ->setNombres_productos($_POST['nombres_productos']);
+    $data ->setPrecios_productos($_POST['precios_productos']);
     /* print_r($data); */
 
     $data->update();
     print_r($data);
-    echo "<script>alert('Datos actualizados satisfactoriamente');document.location='empleados.php'</script>";
+    echo "<script>alert('Datos actualizados satisfactoriamente');document.location='productos.php'</script>";
 }
 ?>
 
@@ -71,7 +70,7 @@ if (isset($_POST['editar'])){
           <h3 style="margin: 0px;font-weight: 800;">Home</h3>
         </a>
 
-        <a href="empleados.php" style="display: flex;gap:2px;">
+        <a href="../empleados/empleados.php" style="display: flex;gap:2px;">
         <i class="bi bi-cart-check"></i>
           <h3 style="margin: 0px;">Empleados</h3>
         </a>
@@ -80,7 +79,7 @@ if (isset($_POST['editar'])){
         <i class="bi bi-cart-check"></i>
           <h3 style="margin: 0px;">Clientess</h3>
         </a>
-        <a href="../productos/productos.php" style="display: flex;gap:1px;">
+        <a href="productos.php" style="display: flex;gap:1px;">
           <i class="bi bi-people"></i>
           <h3 style="margin: 0px;font-weight: 800;">Productos</h3>
         </a>
@@ -90,43 +89,33 @@ if (isset($_POST['editar'])){
     </div>
 
     <div class="parte-media">
-        <h2 class="m-2">Empleado a Editar</h2>
+        <h2 class="m-2">Producto a Editar</h2>
       <div class="menuTabla contenedor2">
       <form class="col d-flex flex-wrap" action=""  method="post">
               <div class="mb-1 col-12">
-                <label for="nombres_Empleados" class="form-label">Nombres</label>
+                <label for="nombres_productos" class="form-label">Nombres</label>
                 <input 
                   type="text"
-                  id="nombres_Empleados"
-                  name="nombres_Empleados"
+                  id="nombres_productos"
+                  name="nombres_productos"
                   class="form-control"  
-                  value="<?php echo $val['nombres_Empleados']?>"
+                  value="<?php echo $val['nombres_productos']?>"
                 />
               </div>
 
               <div class="mb-1 col-12">
-                <label for="celular_Empleados" class="form-label">Celular</label>
+                <label for="precios_productos" class="form-label">Celular</label>
                 <input 
                   type="number"
-                  id="celular_Empleados"
-                  name="celular_Empleados"
+                  id="precios_productos"
+                  name="precios_productos"
                   class="form-control"  
-                  value="<?php echo $val['celular_Empleados']?>"
+                  value="<?php echo $val['precios_productos']?>"
                  
                 />
               </div>
 
-              <div class="mb-1 col-12">
-                <label for="direccion" class="form-label">Direccion</label>
-                <input 
-                  type="text"
-                  id="direccion"
-                  name="direccion"
-                  class="form-control"  
-                  value="<?php echo $val['direccion']?>"
-                 
-                />
-              </div>
+              
 
               <div class=" col-12 m-2">
                 <input type="submit" class="btn btn-primary" value="UPDATE" name="editar"/>

@@ -1,4 +1,11 @@
 <?php
+
+ini_set("display_errors", 1);
+
+ini_set("display_startup_errors", 1);
+
+error_reporting(E_ALL);
+
 require_once("db.php");
 
 class ConexionPDO{
@@ -10,16 +17,16 @@ class ConexionPDO{
 
 class Empleados extends ConexionPDO{
     private $idEmpleados;
-    private $nombres;
-    private $celular;
+    private $nombres_Empleados;
+    private $celular_Empleados;
     private $direccion;
 
-    public function __construct($idEmpleados = 0, $nombres = "", $celular= 0, $direccion=""){
+    public function __construct($idEmpleados = 0, $nombres_Empleados = "", $celular_Empleados= 0, $direccion="" , $dbCnx = ""){
         $this -> idEmpleados = $idEmpleados;
-        $this -> nombres = $nombres;
-        $this -> celular = $celular;
+        $this -> nombres_Empleados = $nombres_Empleados;
+        $this -> celular_Empleados = $celular_Empleados;
         $this -> direccion = $direccion;
-        parent::__construct();
+        parent::__construct($dbCnx);
     }
 
     public function setIdEmpleados($idEmpleados){
@@ -30,20 +37,20 @@ class Empleados extends ConexionPDO{
         return $this->idEmpleados;
     }
 
-    public function setNombres($nombres){
-        $this->nombres = $nombres;
+    public function setNombres_Empleados($nombres_Empleados){
+        $this->nombres_Empleados = $nombres_Empleados;
     }
 
-    public function getNombres(){
-        return $this->nombres;
+    public function getNombres_Empleados(){
+        return $this->nombres_Empleados;
     }
 
-    public function setCelular($celular){
-        $this->celular = $celular;
+    public function setCelular_Empleados($celular_Empleados){
+        $this->celular_Empleados = $celular_Empleados;
     }
 
-    public function getCelular(){
-        return $this->celular;
+    public function getCelular_Empleados(){
+        return $this->celular_Empleados;
     }
 
     public function setDireccion($direccion){
@@ -56,8 +63,8 @@ class Empleados extends ConexionPDO{
 
     public function insertData(){
         try {
-            $stm = $this->dbCnx -> prepare("INSERT INTO empleado (nombres, celular, direccion) values(?,?,?)");
-            $stm -> execute([$this->nombres, $this->celular,$this->direccion]);
+            $stm = $this->dbCnx -> prepare("INSERT INTO empleado (nombres_Empleados, celular_Empleados, direccion) values(?,?,?)");
+            $stm -> execute([$this->nombres_Empleados, $this->celular_Empleados,$this->direccion]);
         } catch (Exception $e) {
             return $e->getMessage();
         }
@@ -94,8 +101,8 @@ class Empleados extends ConexionPDO{
 
     public function update(){
         try {
-            $stm = $this->dbCnx ->prepare("UPDATE empleado SET nombres = ?, celular = ?, direccion = ? WHERE idEmpleados =?");
-            $stm -> execute([$this->nombres,$this->celular, $this->direccion,$this->idEmpleados]);
+            $stm = $this->dbCnx ->prepare("UPDATE empleado SET nombres_Empleados = ?, celular_Empleados = ?, direccion = ? WHERE idEmpleados =?");
+            $stm -> execute([$this->nombres_Empleados,$this->celular_Empleados, $this->direccion,$this->idEmpleados]);
         } catch (Exception $e) {
             return $e->getMessage();
         }
@@ -104,7 +111,185 @@ class Empleados extends ConexionPDO{
 }
 
 class Clientes extends ConexionPDO{
+    private $idClientes;
+    private $nombres_Clientes;
+    private $celular_Clientes;
+    private $compañia;
 
+    public function __construct($idClientes = 0, $nombres_Clientes = "", $celular_Clientes = 0, $compañia = "", $dbCnx = ""){
+        $this -> idClientes = $idClientes;
+        $this -> nombres_Clientes = $nombres_Clientes;
+        $this -> celular_Clientes = $celular_Clientes;
+        $this -> compañia = $compañia;
+        parent::__construct($dbCnx);
+    }
+
+    public function setIdClientes($idClientes){
+        $this->idClientes = $idClientes;
+    }
+
+    public function getIdClientes(){
+        return $this->idClientes;
+    }
+
+    public function setNombres_Clientes($nombres_Clientes){
+        $this->nombres_Clientes = $nombres_Clientes;
+    }
+
+    public function getNombres_Clientes(){
+        return $this->nombres_Clientes;
+    }
+
+    public function setCelular_Clientes($celular_Clientes){
+        $this->celular_Clientes = $celular_Clientes;
+    }
+
+    public function getCelular_Clientes(){
+        return $this->celular_Clientes;
+    }
+
+    public function setCompañia($compañia){
+        $this->compañia = $compañia;
+    }
+
+    public function getCompañia(){
+        return $this->compañia;
+    }
+
+    public function insertData(){
+        try {
+            $stm = $this->dbCnx -> prepare("INSERT INTO clientes (nombres_Clientes, celular_Clientes, compañia) values(?,?,?)");
+            $stm -> execute([$this->nombres_Clientes, $this->celular_Clientes,$this->compañia]);
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function obtainAll(){
+        try {
+            $stm = $this->dbCnx -> prepare("SELECT * FROM clientes");
+            $stm -> execute();
+            return $stm -> fetchAll();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+    public function delete(){
+        try {
+            $stm = $this->dbCnx -> prepare("DELETE FROM clientes WHERE idClientes = ?");
+            $stm -> execute([$this->idClientes]);
+            return $stm -> fetchAll();
+            /* echo "<script>alert('Registro eliminadoo');document.location='empleados.php'</script>"; */
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+    public function selectOne(){
+        try {
+            $stm = $this->dbCnx -> prepare("SELECT * FROM clientes WHERE idClientes = ?");
+            $stm -> execute([$this->idClientes]);
+            return $stm->fetchAll();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function update(){
+        try {
+            $stm = $this->dbCnx ->prepare("UPDATE clientes SET nombres_Clientes = ?, celular_clientes = ?, compañia = ? WHERE idClientes =?");
+            $stm -> execute([$this->nombres_Clientes,$this->celular_Clientes, $this->compañia,$this->idClientes]);
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+}
+
+class Productos extends ConexionPDO{
+    private $idProducto;
+    private $nombres_productos;
+    private $precios_productos;
+    
+    public function __construct($idProducto = 0, $nombres_productos = "", $precios_productos = 0, $dbCnx = ""){
+        $this -> idProducto = $idProducto;
+        $this -> nombres_productos = $nombres_productos;
+        $this -> precios_productos = $precios_productos;
+        parent::__construct($dbCnx);
+    }
+
+    public function setIdProducto($idProducto){
+        $this->idProducto = $idProducto;
+    }
+
+    public function getIdProducto(){
+        return $this->idProducto;
+    }
+
+    public function setNombres_productos($nombres_productos){
+        $this->nombres_productos = $nombres_productos;
+    }
+
+    public function getNombres_productos(){
+        return $this->nombres_productos;
+    }
+
+    public function setPrecios_productos($precios_productos){
+        $this->precios_productos = $precios_productos;
+    }
+
+    public function getPrecios_productos(){
+        return $this->precios_productos;
+    }
+
+    public function insertData(){
+        try {
+            $stm = $this->dbCnx -> prepare("INSERT INTO productos (nombres_productos, precios_productos) values(?,?)");
+            $stm -> execute([$this->nombres_productos, $this->precios_productos]);
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function obtainAll(){
+        try {
+            $stm = $this->dbCnx -> prepare("SELECT * FROM productos");
+            $stm -> execute();
+            return $stm -> fetchAll();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+    public function delete(){
+        try {
+            $stm = $this->dbCnx -> prepare("DELETE FROM productos WHERE idProducto = ?");
+            $stm -> execute([$this->idProducto]);
+            return $stm -> fetchAll();
+            /* echo "<script>alert('Registro eliminadoo');document.location='empleados.php'</script>"; */
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+    public function selectOne(){
+        try {
+            $stm = $this->dbCnx -> prepare("SELECT * FROM productos WHERE idProducto = ?");
+            $stm -> execute([$this->idProducto]);
+            return $stm->fetchAll();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function update(){
+        try {
+            $stm = $this->dbCnx ->prepare("UPDATE productos SET nombres_productos = ?, precios_productos = ? WHERE idProducto =?");
+            $stm -> execute([$this->nombres_productos,$this->precios_productos,$this->idProducto]);
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+}
+
+class Cotizaciones extends ConexionPDO{
+    
 }
 
 ?>
