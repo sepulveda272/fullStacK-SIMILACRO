@@ -84,17 +84,8 @@ $all = $data-> obtainAll();
 
             <!-- ///////Llenado DInamico desde la Base de Datos -->
             <?php
-
               foreach ($all as $key => $val){
-                /* echo '<tr>';
-                echo '<td>'. $key. '</td>';
-                echo '<td>'. $val->nombre. '</td>';
-                echo '<td>'. $val->diametro. '</td>';
-                echo '<td>'. $val->logradouro. '</td>';
-                echo '<td>'. $val->detalle. '</td>'; */
-
-
-              ?>
+            ?>
 
               <tr>
               <td class=""><?php echo $val['idEmpleados']?></td>

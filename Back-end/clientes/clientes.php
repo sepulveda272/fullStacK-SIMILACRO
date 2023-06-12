@@ -108,8 +108,6 @@ $all = $data-> obtainAll();
               </td>
               </tr>
               <?php } ?>
-       
-
           </tbody>
         
         </table>

@@ -289,7 +289,73 @@ class Productos extends ConexionPDO{
 }
 
 class Cotizaciones extends ConexionPDO{
+    private $idCotizacion;
+    private $idClientes;
+    private $idEmpleados;
+    private $idProducto;
+    private $fecha_alquiler;
+    private $total;
+
+    public function __construct($idCotizacion = 0,$idClientes = 0,$idEmpleados = 0,$idProducto = 0,$fecha_alquiler = "",$total = 0,$dbCnx = ""){
+        $this->idCotizacion = $idCotizacion;
+        $this->idClientes = $idClientes;
+        $this->idEmpleados = $idEmpleados;
+        $this->idProducto = $idProducto;
+        $this->fecha_alquiler = $fecha_alquiler;
+        $this->total = $total;
+        parent::__construct($dbCnx)
+    }
+
+    public function setIdCotizacion($idCotizacion){
+        $this-> idCotizacion = $idCotizacion;
+    }
+
+    public function getIdCotizacion(){
+        return $this -> idCotizacion;
+    }
+
+    public function setIdClientes($idClientes){
+        $this-> idClientes = $idClientes;
+    }
+
+    public function getIdClientes(){
+        return $this -> idClientes;
+    }
+
+    public function setIdEmpleados($idEmpleados){
+        $this-> idEmpleados = $idEmpleados;
+    }
+
+    public function getIdEmpleados(){
+        return $this -> idEmpleados;
+    }
+
+    public function setIdProducto($idProducto){
+        $this-> idProducto = $idProducto;
+    }
+
+    public function getIdProducto(){
+        return $this -> idProducto;
+    }
+
+    public function setFecha_alquiler($fecha_alquiler){
+        $this-> fecha_alquiler = $fecha_alquiler;
+    }
+
+    public function getFecha_alquiler(){
+        return $this -> fecha_alquiler;
+    }
+
+    public function setTotal($total){
+        $this-> total = $total;
+    }
+
+    public function getTotal(){
+        return $this -> total;
+    }
+
     
+
 }
 
 ?>

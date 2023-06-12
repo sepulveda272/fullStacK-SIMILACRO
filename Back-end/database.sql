@@ -1,6 +1,6 @@
-CREATE DATABASE alquilartemis;
+CREATE DATABASE alquilartemisjuan;
 
-USE alquilartemis;
+USE alquilartemisjuan;
 
 
 CREATE TABLE empleado(
@@ -24,7 +24,7 @@ CREATE TABLE productos(
 );
 
 CREATE TABLE cotizaciones (
-  cotizacionid INT AUTO_INCREMENT PRIMARY KEY,
+  idCotizacion INT AUTO_INCREMENT PRIMARY KEY,
   idClientes INT,
   idEmpleados INT,
   idProducto INT(50),
