@@ -28,7 +28,7 @@ CREATE TABLE cotizaciones (
   idClientes INT,
   idEmpleados INT,
   idProducto INT(50),
-  fecha_alquiler DATETIME,
+  fecha_alquiler VARCHAR (200),
   total INT (50),
   FOREIGN KEY (idClientes) REFERENCES clientes(idClientes),
   FOREIGN KEY (idEmpleados) REFERENCES empleado(idEmpleados),

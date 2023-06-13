@@ -303,7 +303,7 @@ class Cotizaciones extends ConexionPDO{
         $this->idProducto = $idProducto;
         $this->fecha_alquiler = $fecha_alquiler;
         $this->total = $total;
-        parent::__construct($dbCnx)
+        parent::__construct($dbCnx);
     }
 
     public function setIdCotizacion($idCotizacion){
@@ -354,7 +354,104 @@ class Cotizaciones extends ConexionPDO{
         return $this -> total;
     }
 
-    
+    public function obtenerIdClientes(){
+        try {
+            $stm = $this -> dbCnx -> prepare("SELECT idClientes,nombres_Clientes FROM clientes");
+            $stm -> execute();
+            return $stm -> fetchAll();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function idClientes(){
+        try {
+            $stm = $this -> dbCnx -> prepare("SELECT idClientes,nombres_Clientes FROM clientes WHERE idClientes=:idClientes");
+            $stm -> bindParam(":idClientes",$this->idClientes);
+            $stm -> execute();
+            return $stm -> fetchAll();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function obtenerIdEmpleados(){
+        try {
+            $stm = $this -> dbCnx -> prepare("SELECT idEmpleados,nombres_Empleados FROM empleado");
+            $stm -> execute();
+            return $stm -> fetchAll();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function idEmpleados(){
+        try {
+            $stm = $this -> dbCnx -> prepare("SELECT idEmpleados,nombres_Empleados FROM empleado WHERE idEmpleados=:idEmpleados");
+            $stm -> bindParam(":idEmpleados",$this->idEmpleados);
+            $stm -> execute();
+            return $stm -> fetchAll();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function obtenerIdProducto(){
+        try {
+            $stm = $this -> dbCnx -> prepare("SELECT idProducto,nombres_productos FROM productos");
+            $stm -> execute();
+            return $stm -> fetchAll();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function idProducto(){
+        try {
+            $stm = $this -> dbCnx -> prepare("SELECT idProducto,nombres_productos FROM productos WHERE idProducto=:idProducto");
+            $stm -> bindParam(":idProducto",$this->idProducto);
+            $stm -> execute();
+            return $stm -> fetchAll();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function insertData(){
+        try {
+            $stm = $this-> dbCnx -> prepare("INSERT INTO cotizaciones (idClientes,idEmpleados,idProducto,fecha_alquiler,total) 
+            VALUES (:idClientes,:idEmpleados,:idProducto,:fecha_alquiler,:total)");
+            $stm->bindParam(":idClientes",$this->idClientes);
+            $stm->bindParam(":idEmpleados",$this->idEmpleados);
+            $stm->bindParam(":idProducto",$this->idProducto);
+            $stm->bindParam(":fecha_alquiler",$this->fecha_alquiler);
+            $stm->bindParam(":total",$this->total);
+            $stm->execute();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function obtainAll(){
+        try {
+            $stm = $this-> dbCnx -> prepare("SELECT * FROM cotizaciones INNER JOIN clientes ON cotizaciones.idClientes = clientes.idClientes INNER JOIN empleado ON cotizaciones.idEmpleados = empleado.idEmpleados INNER JOIN productos ON cotizaciones.idProducto = productos.idProducto");
+            $stm -> execute();
+            return $stm -> fetchAll();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function delete(){
+        try {
+            $stm = $this-> dbCnx -> prepare("DELETE FROM cotizaciones WHERE idCotizacion = :idCotizacion");
+            $stm->bindParam(":idCotizacion",$this->idCotizacion);
+            $stm -> execute();
+            return $stm -> fetchAll();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
 
 }
 
